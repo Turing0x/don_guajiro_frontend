@@ -1,0 +1,15 @@
+
+<div>
+
+  <div class="menu">
+    <span (click)="navegareUrl('/admin/operaciones')">Operaciones</span>
+    <span (click)="navegareUrl('/admin/pendientes')">Pendientes</span>
+    <span (click)="navegareUrl('/admin/historialOperaciones')">Historial de Ventas</span>
+    <span (click)="navegareUrl('/admin/historialVentas')">Historial de Operaciones</span>
+  </div>
+  <main class="main">
+    <router-outlet></router-outlet>
+  </main>
+
+
+</div>

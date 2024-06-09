@@ -1,0 +1,36 @@
+
+
+<div class="container">
+
+  <form class="cont-register" [formGroup]="salesForm">
+    <div class="register">
+      <div>
+        <label for="select-operacion">Selecciona el tipo de Operación:</label>
+        <select id="select-operacion" name="" id="">
+        <option value="">1</option>
+        <option value="">2</option>
+        <option value="">3</option>
+      </select>
+      </div>
+      <div>
+        <label for="cantidad">Cantidad Monetaria</label>
+        <input type="number" id="cantidad">
+      </div>
+      <div>
+        <label for="description">Description detallada</label>
+        <textarea  type="text" id="description"></textarea>
+      </div>
+      <button>Guardar</button>
+    </div>
+  </form>
+  <div  class="cont-register">
+    <form class="tipo-operacion">
+      <div>
+        <label for="TipOperación">Tipo de Operación:</label>
+        <input type="text" id="TipOperación">
+      </div>
+      <button>Guardar</button>
+    </form>
+  </div>
+
+</div>
