@@ -2,7 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 
 import Swal from 'sweetalert2';
-import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../../interfaces';
+import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../interfaces';
 import { environment } from '../../../environments/environments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Data } from '@angular/router';

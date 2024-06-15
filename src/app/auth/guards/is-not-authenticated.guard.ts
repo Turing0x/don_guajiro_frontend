@@ -1,7 +1,7 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth-service.service';
-import { AuthStatus } from '../../interfaces';
+import { AuthStatus } from '../interfaces';
 
 export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
 
@@ -13,6 +13,8 @@ export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
   }
 
   if( authService.authStatus( )  === AuthStatus.checking){
+  router.navigate(['/noServer']);
+
     return false;
   }
 

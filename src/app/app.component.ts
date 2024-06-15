@@ -1,8 +1,9 @@
 import { AuthService } from './auth/services/auth-service.service';
-import { Component, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { AuthStatus } from './interfaces';
-import { UserRole } from './interfaces/roles-users.enum';
+import { AuthStatus } from './auth/interfaces';
+import { UserRole } from './auth/interfaces/roles-users.enum';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -12,27 +13,34 @@ import { UserRole } from './interfaces/roles-users.enum';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'don_guajiro_frontend';
+  title = 'Don Guajiro';
 
   private authService = inject(AuthService);
   private router = inject(Router);
 
-
   public authStatusChangedEffect = effect(() => {
 
     switch (this.authService.authStatus()) {
+
       case AuthStatus.checking:
-        return;
+
+      break;
 
       case AuthStatus.authenticated:
         console.log('autenticado');
-        this.router.navigateByUrl('/admin');
-        return;
+        const lastPath = localStorage.getItem('lastPath');
+        if ( lastPath ) this.router.navigate([lastPath]);
+        else {
+          localStorage.setItem( 'lastPath','admin/operaciones')
+          this.router.navigate(['/admin']);
+        }
+
+      break;
 
       case AuthStatus.notAuthenticated:
         console.log('no autenticado');
         this.router.navigate(['login']);
-        return;
+        break;
     }
   })
 
@@ -41,7 +49,7 @@ export class AppComponent {
   navigateByUrl(): string {
     const current = this.authService.currentUser();
 
-    if(!current) {
+    if (!current) {
       this.router.navigate(['login']);
       return '';
     };

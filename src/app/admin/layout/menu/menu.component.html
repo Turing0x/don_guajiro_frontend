@@ -1,15 +1,91 @@
+<div class="container">
+  <div class="navigation">
+    <ul  style="height: 100vh;">
+      <li>
+        <a href="#">
+          <span class="icon">
+            <!-- <svg
+            style="transform: rotate(180deg);"
+                      xmlns="http://www.w3.org/2000/svg" class="ml-4 icon icon-tabler icon-tabler-login-2" width="30"
+                        height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
+                        <path d="M3 12h13l-3 -3" />
+                        <path d="M13 15l3 -3" />
+                      </svg> -->
+          </span>
+          <span class="title" style="font-size: 1.2rem;">Don Guajiro</span>
+        </a>
+      </li>
 
-<div>
+        <li (click)="navegareUrl('admin/operaciones')">
+          <a href="#">
+            <span class="icon">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-activity"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12h4l3 8l4 -16l3 8h4" /></svg>
 
-  <div class="menu">
-    <span (click)="navegareUrl('/admin/operaciones')">Operaciones</span>
-    <span (click)="navegareUrl('/admin/pendientes')">Pendientes</span>
-    <span (click)="navegareUrl('/admin/historialOperaciones')">Historial de Ventas</span>
-    <span (click)="navegareUrl('/admin/historialVentas')">Historial de Operaciones</span>
+            </span>
+            <span class="title" >Operaciónes</span>
+          </a>
+        </li>
+
+        <li (click)="navegareUrl('admin/pendientes')">
+          <a href="#">
+            <span class="icon">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-sort-descending"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l9 0" /><path d="M4 12l7 0" /><path d="M4 18l7 0" /><path d="M15 15l3 3l3 -3" /><path d="M18 6l0 12" /></svg>
+            </span>
+            <span class="title" >Pendientes</span>
+          </a>
+        </li>
+
+        <li (click)="navegareUrl('admin/historialVentas')">
+          <a href="#">
+            <span class="icon">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-checklist"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
+            </span>
+            <span class="title" >Historial de Ventas</span>
+          </a>
+        </li>
+
+        <li (click)="navegareUrl('admin/historialOperaciones')">
+          <a href="#">
+            <span class="icon">
+
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-checkup-list"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 14h.01" /><path d="M9 17h.01" /><path d="M12 16l1 1l3 -3" /></svg>
+              </span>
+            <button class="title"  >Historial de Operaciones</button>
+          </a>
+        </li>
+
+
+
+      <li
+      class="logout"
+      style=" position: absolute;bottom: 20px;" (click)="logout()"
+      >
+
+      <a  style="cursor: pointer;">
+          <span class="icon">
+            <svg
+          style="transform: rotate(180deg);"
+          xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-checks">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
+            <path d="M3 12h13l-3 -3" />
+            <path d="M13 15l3 -3" />
+          </svg>
+          </span>
+          <span class="title">Cerrar Cuenta</span>
+        </a>
+      </li>
+    </ul>
   </div>
-  <main class="main">
+
+  <!-- ========================= Main ==================== -->
+  <div class="main">
     <router-outlet></router-outlet>
-  </main>
 
+    <!-- ================ Order Details List ================= -->
 
+  </div>
 </div>

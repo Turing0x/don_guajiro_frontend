@@ -33,15 +33,6 @@ export const routesAdmin: Routes =  [
         path:'**',
         redirectTo: 'operaciones'
       }
-
     ]
   },
-  // {
-  //   path:'**',
-  //   redirectTo: 'admin/operaciones'
-  // }
-
-
-
-
 ]

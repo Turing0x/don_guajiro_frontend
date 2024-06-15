@@ -1,4 +1,4 @@
-import { User } from './../../../interfaces/user.interface';
+import { User } from '../../interfaces/user.interface';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class LoginComponent {
         if (data['user'].role === 'admin') {
           this.authService.setAuthentication(data['user'], data['token']);
           await Swal.fire('Satisfactorio', 'Usted se ha autenticado en la plataforma', 'success')
-          this.router.navigateByUrl('/admin')
+          this.router.navigateByUrl('/admin/operaciones')
         }
         else {
           await Swal.fire('Error', 'Usted no es Administrador', 'error');
