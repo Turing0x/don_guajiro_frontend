@@ -50,7 +50,7 @@ export class OperacionesComponent  {
     else
       Swal.fire({
         title: "Estás seguro?",
-        text: "Ésta acción eliminará por completo al usuario del sistema.",
+        text: "Esta acción guardará la operación.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -61,8 +61,9 @@ export class OperacionesComponent  {
           this.operacionesService.saveDebts(this.debtsForm.value)
             .subscribe(
               response => {
-                if (response.success) this.ShowMessage('Registro completado', 'success');
-                else this.ShowMessage(response.api_message, 'error');
+                console.log(response);
+                if (!response.success)
+                  this.ShowMessage(response.api_message, 'error');
               }
             )
         }
@@ -72,7 +73,7 @@ export class OperacionesComponent  {
   SaveDebtsType() {
     Swal.fire({
       title: "Estás seguro?",
-      text: "Ésta acción eliminará por completo al usuario del sistema.",
+      text: "Esta acción guardará el tipo de operación.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -84,8 +85,8 @@ export class OperacionesComponent  {
           .subscribe(
             response => {
               if (response.success) {
-                this.ShowMessage('Registro completado', 'success');
-                this.operacionesService.debtsType.set({...response})
+                this.operacionesService.debtsType.set({ ...response })
+                this.debtsTypeForm.controls['name'].setValue('')
               }
               else this.ShowMessage(response.api_message, 'error');
             }
@@ -109,7 +110,6 @@ export class OperacionesComponent  {
           .subscribe(
             response => {
               if (response.success) {
-                this.ShowMessage('Eliminar completado', 'success');
                 this.operacionesService.debtsType.set({...response})
               }
               else this.ShowMessage(response.api_message, 'error');

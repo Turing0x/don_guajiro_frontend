@@ -1,7 +1,7 @@
 <div class="details">
   <div class="recentOrders">
     <form [formGroup]="saleForm" class="cardHeader">
-      <h2>Ventas realizadas en el Sistema</h2>
+      <h2>Ventas Realizadas</h2>
       <div (change)="seachDate()">
         <span for="date">Fecha:</span>
         <input
@@ -42,7 +42,7 @@
       <tbody>
         @for (item of salesList().data ; track $index) {
         <tr>
-          <td>{{ item.product }}</td>
+          <td>{{ item.product | titlecase }}</td>
           <td>{{ item.date }}</td>
           <td>{{ item.cantToBuy }}</td>
           <td>{{ item.price }}</td>

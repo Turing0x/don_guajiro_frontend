@@ -49,12 +49,12 @@
           </span>
         </button>
         <button
-          title="Autorizar todas las Ventas Pendientes"
-          (click)="markSaleAsFinished(0, true)"
+          title="Aprobar todas las Ventas Pendientes"
+          (click)="markSaleAsFinished('', true)"
           class="btn"
           style="display: flex; gap: 8px"
         >
-          <span> Autorizar Todo </span>
+          <span> Aprobar Todo </span>
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -83,8 +83,8 @@
         src="../../../../assets/img/loadin-info.jpg"
         alt="Imagen: No encontrado"
       />
-      <h2 style="color: #2a2185">
-        No existe ninguna Coincidencia para la Busqueda
+      <h2 style="color: #2a2185; width: 100%; text-align: center">
+        No hay elementos para mostrar
       </h2>
     </div>
     } @else {
@@ -99,7 +99,7 @@
           <td>Fecha</td>
           <td>Cantidad</td>
           <td>Precio</td>
-          <td>Autorizar</td>
+          <td>Aprobar</td>
         </tr>
       </thead>
 
@@ -112,9 +112,9 @@
           <td>{{ item.price }}</td>
           <td>
             <button
-              (click)="markSaleAsFinished($index)"
+              (click)="markSaleAsFinished(item._id!)"
               class="btn-act finish"
-              title="Eliminar del sistema esta entidad"
+              title="Marcar como aprobado"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

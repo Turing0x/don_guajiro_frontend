@@ -1,5 +1,3 @@
-import { User } from "./user.interface";
-
 export interface LoginResponse {
   success: boolean;
   api_message: string;
@@ -7,6 +5,8 @@ export interface LoginResponse {
 }
 
 interface Data {
-  user: User;
+  username: string;
+  userID: string;
+  role: string;
   token: string;
 }

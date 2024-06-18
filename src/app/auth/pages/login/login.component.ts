@@ -28,14 +28,18 @@ export class LoginComponent {
     const { username, password } = this.myForm.value;
 
     this.authService.login(username, password).subscribe(
-      async data => {
-        if (data['user'].role === 'admin') {
-          this.authService.setAuthentication(data['user'], data['token']);
+      resp => {
+        if (resp.data.role === 'admin') {
+          this.authService.setAuthentication({
+            _id: resp.data.userID, 
+            username: resp.data.username,
+            role: resp.data.role,
+          }, resp.data.token);
           this.router.navigateByUrl('/admin/operaciones')
         }
         else {
           this.router.navigateByUrl('/login')
-          await Swal.fire('Error', 'Usted no es Administrador', 'error');
+          Swal.fire('Error', 'Usted no es Administrador', 'error');
         }
       }
     )

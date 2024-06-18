@@ -14,10 +14,10 @@ import { getDate } from '../../help/getDate';
 })
 export class PendientesComponent {
 
-  public salesList = computed<getSalesResult>( () =>  this.salesService.sales());
+  public salesList = computed<getSalesResult>(
+    () => this.salesService.sales());
 
   private fb = inject(FormBuilder);
-  private date: boolean = true;
 
   constructor(private salesService: SalesService) { }
 
@@ -30,7 +30,6 @@ export class PendientesComponent {
   });
 
   seachDate(date?: string) {
-    this.date = true;
     if( !date ) date = getDate(this.saleForm.controls['date'].value);
     this.salesService.getAllSaleDate( date , true).subscribe(
       data => {
@@ -40,7 +39,6 @@ export class PendientesComponent {
   }
 
   getAllSale(perding: boolean){
-    this.date = false;
     this.saleForm.controls['date'].setValue('');
     this.salesService.getAllSale( perding ).subscribe(
       data => {
@@ -49,16 +47,23 @@ export class PendientesComponent {
     )
   }
 
-  markSaleAsFinished(index: number, all: boolean = false) {
+  markSaleAsFinished(id: string, all: boolean = false) {
 
     if (all) {
       const list_id: string[] = [];
       this.salesList().data.forEach(element => list_id.push(element._id ?? ''));
       this.salesService.markSaleAsFinished(list_id, true).subscribe();
-    }
-    else this.salesService.markSaleAsFinished(this.salesList().data[index]._id, false).subscribe();
 
-    if( this.date ) this.seachDate();
-    else this.getAllSale(false);
+      this.salesService.sales().data = [];
+    }
+    else {
+      this.salesService.markSaleAsFinished(
+        id, false).subscribe();
+    
+      this.salesService.sales().data =
+        this.salesService.sales().data.filter(
+          element => element._id !== id);
+    }
+
   }
 }

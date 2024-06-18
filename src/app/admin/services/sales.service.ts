@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 
 import { getDebtsTypeResult, getSalesResult } from "../interfaces/response.interface";
 import { environment } from "../../../environments/environments";
@@ -35,8 +35,11 @@ export class SalesService {
   }
 
   markSaleAsFinished(id: any, all: boolean = false) {
-    return this.http.put<getSalesResult>(`${this.url}/${
-      !all ? id[0] : {}}`, { list_id: id });
+    if (all) {
+      return this.http.put<getSalesResult>
+        (`${this.url}/${id[0]}`, { list_id: id });
+    }
+    else{ return this.http.put<getSalesResult>(`${this.url}/${id}`, {}); }
   }
 
   resetSiganalSales() {

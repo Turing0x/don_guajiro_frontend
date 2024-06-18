@@ -43,10 +43,10 @@
     </div>
     <form class="cont-register" [formGroup]="debtsForm">
       <div>
-        <label for="select-operacion">Selecciona el tipo de Operación:</label>
+        <label for="select-operacion">Selecciona el Tipo de Operación:</label>
         <select id="select-operacion" name="" id="" formControlName="type">
           @for (item of debtsTypeList().data; track $index) {
-          <option value="{{ item._id }}">{{ item.name }}</option>
+          <option value="{{ item._id }}">{{ item.name | titlecase }}</option>
           }
         </select>
       </div>
@@ -55,7 +55,7 @@
         <input type="number" id="cantidad" formControlName="money" />
       </div>
       <div>
-        <label for="description">Description detallada</label>
+        <label for="description">Descripción Detallada</label>
         <input type="text" id="description" formControlName="description" />
       </div>
     </form>
@@ -135,7 +135,7 @@
       <thead>
         <tr>
           <td>Número</td>
-          <td>Name</td>
+          <td>Nombre</td>
           <td>Eliminar</td>
         </tr>
       </thead>
@@ -143,7 +143,7 @@
         @for (item of debtsTypeList().data; track $index) {
         <tr>
           <td># - {{ $index + 1 }}</td>
-          <td>{{ item.name }}</td>
+          <td>{{ item.name | titlecase }}</td>
           <td>
             <button
               (click)="deleteDebtsType($index)"

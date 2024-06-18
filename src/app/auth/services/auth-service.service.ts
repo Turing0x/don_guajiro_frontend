@@ -2,9 +2,8 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../interfaces';
+import { AuthStatus, CheckTokenResponse, Data, LoginResponse, User } from '../interfaces';
 import { environment } from '../../../environments/environments';
-import { Data } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +33,7 @@ export class AuthService  {
     return true;
   }
 
-  login(username: string, password: string):Observable<Data> {
+  login(username: string, password: string): Observable<LoginResponse> {
     const url = `${this.baseUrl}/api/users/signIn`;
     const body = { username, password };
     return this.http.post<LoginResponse>(url, body);

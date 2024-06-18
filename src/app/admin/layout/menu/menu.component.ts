@@ -19,7 +19,7 @@ export class MenuComponent {
   logout() {
     Swal.fire({
       title: "Estás seguro?",
-      text: "Ésta acción te va a desautenticar del Sistema.",
+      text: "Esta acción cerrará la sesión",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",

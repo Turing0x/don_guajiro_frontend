@@ -35,8 +35,8 @@
     <table>
       <thead>
         <tr>
-          <td>Producto</td>
-          <td>Precio</td>
+          <td>Tipo de Operación</td>
+          <td>Dinero</td>
           <td>Fecha</td>
           <td>Descripción</td>
         </tr>
@@ -44,10 +44,10 @@
       <tbody>
         @for (item of debtsList().data; track $index) {
         <tr>
-          <td>{{ item.type?.name }}</td>
+          <td>{{ item.type?.name | titlecase }}</td>
           <td>{{ item.money }}</td>
           <td>{{ item.date }}</td>
-          <td>{{ item.description }}</td>
+          <td>{{ item.description | titlecase }}</td>
         </tr>
         }
       </tbody>
