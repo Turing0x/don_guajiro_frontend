@@ -1,15 +1,8 @@
-
-
 .icon {
   display: flex;
   text-align: center;
   justify-content: center;
 }
-/*
-svg{
-  width: 20px;
-  height: 20px;
-} */
 
 svg:hover {
   color: #2a2185;
@@ -17,5 +10,4 @@ svg:hover {
 
 svg {
   left: 10px;
-
 }

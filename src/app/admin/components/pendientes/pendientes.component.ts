@@ -1,17 +1,16 @@
-import { ChangeDetectorRef, Component, computed, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { getDate } from '../../help/getDate';
-import { Sale } from '../../interfaces/sales.interface';
+import { Component, computed, inject } from '@angular/core';
+
 import { SalesService } from '../../services/sales.service';
-import { CommonModule } from '@angular/common';
 import { getSalesResult } from '../../interfaces/response.interface';
+import { CommonModule } from '@angular/common';
+import { getDate } from '../../help/getDate';
 
 @Component({
   selector: 'app-pendientes',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './pendientes.component.html',
-  styleUrl: './pendientes.component.css'
+  templateUrl: './pendientes.component.html'
 })
 export class PendientesComponent {
 

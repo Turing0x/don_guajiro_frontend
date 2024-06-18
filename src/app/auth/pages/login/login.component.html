@@ -1,56 +1,80 @@
-<div class="bg-white white:bg-zinc-900 flex items-center justify-center min-h-screen">
+<div
+  class="bg-white white:bg-zinc-900 flex items-center justify-center min-h-screen"
+>
   <div
-    class="w-full md:w-11/12 lg:w-10/12 xl:w-8/12 mx-auto p-8 bg-white white:bg-zinc-900 rounded-lg shadow-xl flex flex-col md:flex-row">
+    class="w-full md:w-11/12 lg:w-10/12 xl:w-8/12 mx-auto p-8 bg-white white:bg-zinc-900 rounded-lg shadow-xl flex flex-col md:flex-row"
+  >
     <div class="md:w-1/2 md:mr-4 flex justify-center mb-6">
-      <img src="../../../../assets/img/login/undraw_done_re_oak4.svg" alt="">
+      <img src="../../../../assets/img/login/undraw_done_re_oak4.svg" alt="" />
     </div>
     <div class="md:w-1/2 md:ml-4">
-      <h2 class="text-4xl font-bold text-center  dark:text-zinc-500 mb-8">¡Iniciar Sesión!</h2>
+      <h2 class="text-4xl font-bold text-center dark:text-zinc-500 mb-8">
+        ¡Iniciar Sesión!
+      </h2>
       <form autocomplete="off" [formGroup]="myForm" (ngSubmit)="login()">
         <div class="mb-4">
-          <input type="text" placeholder="nombre de usuario" formControlName="username"
+          <input
+            type="text"
+            placeholder="nombre de usuario"
+            formControlName="username"
             class="w-full px-4 py-2 border rounded-lg text-zinc-700 dark:text-zinc-400 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
-            required>
+            required
+          />
         </div>
         <div class="mb-4">
-          <input type="password" placeholder="contraseña" formControlName="password"
+          <input
+            type="password"
+            placeholder="contraseña"
+            formControlName="password"
             class="w-full px-4 py-2 border rounded-lg text-zinc-700 dark:text-zinc-400 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
-            required>
+            required
+          />
         </div>
-        <div class="mb-4">
-          <!--  <select
-                  class="w-full px-4 py-3 border rounded-lg text-zinc-700 dark:text-zinc-200 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
-                  >
-                  <option value="1">Opción 1</option>
-                  <option value="2">Opción 2</option>
-                  <option value="3">Opción 3</option>
-                </select> -->
-        </div>
+        <div class="mb-4"></div>
         <div class="mb-6 flex items-center">
-          <input type="checkbox" id="remember" class="mr-2" class="marc">
-          <label for="remember" class="text-base text-zinc-600 dark:text-zinc-400">Recordar contraseña</label>
+          <input type="checkbox" id="remember" class="mr-2" class="marc" />
+          <label
+            for="remember"
+            class="text-base text-zinc-600 dark:text-zinc-400"
+            >Recordar contraseña</label
+          >
         </div>
         <button
-        title="Acceder de forma segura a la plataforma"
-        [disabled]="myForm.invalid" type="submit"
-          class="flex justify-center w-full bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-300">Acceder
-          a mi cuenta
+          title="Acceder de forma segura a la plataforma"
+          [disabled]="myForm.invalid"
+          type="submit"
+          class="flex justify-center w-full bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-300"
+        >
+          Acceder a mi cuenta
           <svg
-
-          xmlns="http://www.w3.org/2000/svg" class="ml-4 icon icon-tabler icon-tabler-login-2" width="20"
-            height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
-            stroke-linejoin="round">
+            xmlns="http://www.w3.org/2000/svg"
+            class="ml-4 icon icon-tabler icon-tabler-login-2"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#ffffff"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
+            <path
+              d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2"
+            />
             <path d="M3 12h13l-3 -3" />
             <path d="M13 15l3 -3" />
-          </svg></button>
+          </svg>
+        </button>
       </form>
       <div class="mt-6 text-center">
-        <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline"
-          routerLink="/auth/login/forgot_password">Has olvidado tu contraseña?</a>
+        <a
+          href="#"
+          class="text-blue-500 dark:text-blue-400 hover:underline"
+          routerLink="/auth/login/forgot_password"
+          >Has olvidado tu contraseña?</a
+        >
       </div>
-
     </div>
   </div>
 </div>

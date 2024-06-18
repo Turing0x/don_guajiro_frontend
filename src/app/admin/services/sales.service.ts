@@ -1,19 +1,17 @@
-import { HttpHeaders, HttpClient } from "@angular/common/http";
-import { Injectable, computed, inject, signal } from "@angular/core";
-import { environment } from "../../../environments/environments";
-import { Sale } from "../interfaces/sales.interface";
-import { Observable, map, catchError, throwError } from "rxjs";
-import Swal from "sweetalert2";
+import { Injectable, inject, signal } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+
 import { getDebtsTypeResult, getSalesResult } from "../interfaces/response.interface";
-import { SignalsResponseResult } from "../interfaces/signalsResponseResult.interface";
+import { environment } from "../../../environments/environments";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SalesService {
 
-  private http = inject(HttpClient)
-  private url: string = `${environment.baseUrl}/api/sales`
+  private http = inject(HttpClient);
+  private url: string = `${environment.baseUrl}/api/sales`;
 
   public sales = signal<getSalesResult>({
     success: false,
@@ -22,39 +20,23 @@ export class SalesService {
   })
 
   getAllSaleDate(date: string, pending: boolean) {
-
-    this.resetSiganalSales()
-    return this.http.get<getDebtsTypeResult>(`${this.url}?date=${date}&pending=${pending}`)
-      .pipe(
-        map(response => response)
-      )
+    this.resetSiganalSales();
+    return this.http.get<getDebtsTypeResult>
+      (`${this.url}?date=${date}&pending=${pending}`);
   }
 
-  autorizar(id: string, pending: boolean): Observable<getSalesResult> {
-    return this.http.get<getSalesResult>(`${this.url}`,)
-      .pipe(
-        map(response => response),
-      );
+  autorizar(): Observable<getSalesResult> {
+    return this.http.get<getSalesResult>(`${this.url}`,);
   }
 
   getAllSale(pending: boolean): Observable<getSalesResult> {
-    return this.http.get<getSalesResult>(`${this.url}/pendingAll/${pending}`,)
-      .pipe(
-        map(response => response),
-      );
+    return this.http.get<getSalesResult>
+      (`${this.url}/pendingAll/${pending}`);
   }
 
   markSaleAsFinished(id: any, all: boolean = false) {
-    if (all)
-      return this.http.put<getSalesResult>(`${this.url}/${id[0]}`, {
-        list_id: id
-      }).pipe(
-        map(response => response),
-      );
-    else
-      return this.http.put<getSalesResult>(`${this.url}/${id}`, {}).pipe(
-        map(response => response),
-      );
+    return this.http.put<getSalesResult>(`${this.url}/${
+      !all ? id[0] : {}}`, { list_id: id });
   }
 
   resetSiganalSales() {

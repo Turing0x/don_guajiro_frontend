@@ -1,10 +1,9 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
-import Swal from 'sweetalert2';
 import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../interfaces';
 import { environment } from '../../../environments/environments';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Data } from '@angular/router';
 
 @Injectable({
@@ -20,9 +19,7 @@ export class AuthService  {
   //! Al mundo exterior
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
-
   private readonly baseUrl: string = environment.baseUrl;
-
 
   constructor() {
     this.checkAuthStatus().subscribe();
@@ -38,20 +35,9 @@ export class AuthService  {
   }
 
   login(username: string, password: string):Observable<Data> {
-
     const url = `${this.baseUrl}/api/users/signIn`;
     const body = { username, password };
-
-    return this.http.post<LoginResponse>(url,body)
-      .pipe(map(response => response.data),
-      catchError(e => {
-        Swal.fire(
-          'Error',
-          'Credenciales Incorrectas',
-          'error'
-        )
-        return throwError(() => e)
-      }));
+    return this.http.post<LoginResponse>(url, body);
   }
 
   checkAuthStatus(): Observable<boolean> {
@@ -64,11 +50,10 @@ export class AuthService  {
       return of(false);
     }
 
-    return this.http.post<CheckTokenResponse>(`${url}`,{})
+    return this.http.post<CheckTokenResponse>(`${url}`,{token})
       .pipe(
-        map(({success,  api_message, data}) => this.setAuthentication(data.user, data.token)),
-          catchError(() => {
-          //this._authStatus.set( AuthStatus.authenticated );
+        map(({ data }) => this.setAuthentication(data.user, data.token)),
+        catchError(() => {
           this._authStatus.set(AuthStatus.notAuthenticated);
           return of(false);
         })

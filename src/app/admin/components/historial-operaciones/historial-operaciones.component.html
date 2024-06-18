@@ -4,61 +4,54 @@
       <h2>Historial de Operaciones en el Sistema</h2>
       <form [formGroup]="saleForm">
         <span for="date">Fecha:</span>
-        <input id="date" type="date" formControlName="date" name="" id="" style="width: 150px;"
-          (change)="seachDate(false)">
+        <input
+          id="date"
+          type="date"
+          formControlName="date"
+          name=""
+          id=""
+          style="width: 150px"
+          (change)="seachDate(false)"
+        />
       </form>
-      <!-- <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-        <button
-        title="Buscar todas las Operaciones Realizadas en el Sistema"
-        class="btn" style="display: flex; gap: 8px;" (click)="seachDate(true)"><span>
-            Buscar Todas
-          </span>
-          <span>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
-          </span>
-        </button>
-        <button
-        title="Actualizar todos mis Datos"
-        class="update-icons" (click)="ngOnInit()" style="display: flex; gap: 8px;">
-        <span >
-          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-reorder"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M17 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M5 11v-3a3 3 0 0 1 3 -3h8a3 3 0 0 1 3 3v3" /><path d="M16.5 8.5l2.5 2.5l2.5 -2.5" /></svg>
-        </span>
-        </button>
-      </div> -->
     </div>
 
-    @if( debtsList().data.length <= 0 ){ @if(debtsList().success){ <div class="loading-info-container">
-      <img class="loading-info" src="../../../../assets/img/loadin-info.jpg" alt="Imagen: No encontrado">
-      <h2 style="color: #2a2185;">No existe ninguna Coincidencia para la Busqueda</h2>
+    @if( debtsList().data.length <= 0 ){ @if(debtsList().success){
+    <div class="loading-info-container">
+      <img
+        class="loading-info"
+        src="../../../../assets/img/loadin-info.jpg"
+        alt="Imagen: No encontrado"
+      />
+      <h2 style="color: #2a2185">
+        No existe ninguna Coincidencia para la Busqueda
+      </h2>
+    </div>
+    } @else {
+    <div class="loading-info-container">
+      <h2 style="color: #2a2185">Cargando Elementos...</h2>
+    </div>
+    } } @else {
+    <table>
+      <thead>
+        <tr>
+          <td>Producto</td>
+          <td>Precio</td>
+          <td>Fecha</td>
+          <td>Descripción</td>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of debtsList().data; track $index) {
+        <tr>
+          <td>{{ item.type?.name }}</td>
+          <td>{{ item.money }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.description }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    }
   </div>
-  }
-  @else {
-  <div class="loading-info-container">
-    <h2 style="color: #2a2185;">Cargando Elementos...</h2>
-  </div>
-  }
-  }
-  @else {
-  <table>
-    <thead>
-      <tr>
-        <td>Producto</td>
-        <td>Precio</td>
-        <td>Fecha</td>
-        <td>Descripción</td>
-      </tr>
-    </thead>
-    <tbody>
-      @for (item of debtsList().data; track $index) {
-      <tr>
-        <td>{{item.type?.name}}</td>
-        <td>{{item.money}}</td>
-        <td>{{item.date}}</td>
-        <td>{{item.description}}</td>
-      </tr>
-      }
-    </tbody>
-  </table>
-  }
-</div>
 </div>

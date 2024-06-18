@@ -1,7 +1,6 @@
 import { Debts, DebtsType } from "./debts.interface"
 import { Sale } from "./sales.interface"
 
-
 export interface DebtsTypeResult {
   success: boolean
   api_message: string,
@@ -19,7 +18,6 @@ export interface DeleteDebtsTypeResult {
   api_message: string,
   data: DebtsType
 }
-
 
 export interface getSalesResult {
   success: boolean

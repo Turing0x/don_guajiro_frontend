@@ -1,33 +1,30 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, computed, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, computed, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { getDebtsTypeResult } from '../../interfaces/response.interface';
 import { OperacionesService } from '../../services/operaciones.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { getDate } from '../../help/getDate';
-import { DebtsType } from '../../interfaces/debts.interface';
-import { DeleteDebtsTypeResult, getDebtsTypeResult } from '../../interfaces/response.interface';
 
 @Component({
   selector: 'app-operaciones',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './operaciones.component.html',
-  styleUrl: './operaciones.component.css'
+  templateUrl: './operaciones.component.html'
 })
 export class OperacionesComponent  {
 
   private fb = inject(FormBuilder);
 
-  public debtsTypeList = computed<getDebtsTypeResult>( () =>  this.operacionesService.debtsType());
+  public debtsTypeList = computed<getDebtsTypeResult>
+    (() => this.operacionesService.debtsType());
 
   constructor(private operacionesService: OperacionesService) { }
 
   async ngOnInit(){
-     this.operacionesService.getAllSaveDebtsType().subscribe(
-      data => {
-        this.operacionesService.debtsType.set({...data})
-      }
-      )
+    this.operacionesService.getAllSaveDebtsType().subscribe(
+    data => { this.operacionesService.debtsType.set({...data})})
   }
 
   public debtsForm: FormGroup = this.fb.group({

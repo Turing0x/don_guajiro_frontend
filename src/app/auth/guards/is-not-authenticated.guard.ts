@@ -13,13 +13,9 @@ export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
   }
 
   if( authService.authStatus( )  === AuthStatus.checking){
-  router.navigate(['/noServer']);
-
+    router.navigate(['/noServer']);
     return false;
   }
-
-console.log('noooooooo');
-//  router.navigate(['/login']);
 
   return true;
 };

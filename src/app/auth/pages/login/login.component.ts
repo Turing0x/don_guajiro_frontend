@@ -1,7 +1,7 @@
-import { User } from '../../interfaces/user.interface';
-import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth-service.service';
 
@@ -19,8 +19,8 @@ export class LoginComponent {
   private router = inject(Router)
 
   public myForm: FormGroup = this.fb.group({
-    username: ['admin', [Validators.required]],
-    password: ['0000', [Validators.required]],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
   });
 
   login() {
@@ -31,12 +31,11 @@ export class LoginComponent {
       async data => {
         if (data['user'].role === 'admin') {
           this.authService.setAuthentication(data['user'], data['token']);
-          await Swal.fire('Satisfactorio', 'Usted se ha autenticado en la plataforma', 'success')
           this.router.navigateByUrl('/admin/operaciones')
         }
         else {
-          await Swal.fire('Error', 'Usted no es Administrador', 'error');
           this.router.navigateByUrl('/login')
+          await Swal.fire('Error', 'Usted no es Administrador', 'error');
         }
       }
     )
