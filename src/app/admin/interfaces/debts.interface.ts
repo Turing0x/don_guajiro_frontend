@@ -11,7 +11,7 @@ export interface Debts {
 
 
 export interface DebtsType{
-  _id:string,
+  _id?:string,
  name?:string;
  status?:boolean;
 }

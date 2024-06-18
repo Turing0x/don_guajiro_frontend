@@ -1,4 +1,4 @@
-import { Debts } from "./debts.interface"
+import { Debts, DebtsType } from "./debts.interface"
 import { Sale } from "./sales.interface"
 
 
@@ -11,13 +11,13 @@ export interface DebtsTypeResult {
 export interface getDebtsTypeResult {
   success: boolean
   api_message: string,
-  data: Debts[]
+  data: DebtsType[]
 }
 
 export interface DeleteDebtsTypeResult {
   success: boolean
   api_message: string,
-  data: Debts
+  data: DebtsType
 }
 
 

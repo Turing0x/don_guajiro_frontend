@@ -1,4 +1,4 @@
-import { Injectable, inject } from "@angular/core";
+import { Injectable, inject, signal } from "@angular/core";
 import { environment } from "../../../environments/environments";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, catchError, map, of, throwError } from "rxjs";
@@ -9,114 +9,59 @@ import { DebtsTypeResult, DeleteDebtsTypeResult, getDebtsResult, getDebtsTypeRes
 @Injectable({
   providedIn: 'root'
 })
-export class OperacionesService  {
+export class OperacionesService {
 
-  private get httpHeaders() {
-    return new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-  }
+  public debtsType = signal<getDebtsTypeResult>({
+    success: false,
+    api_message: "",
+    data: []
+  })
+
+  public debts = signal<getDebtsResult>({
+    success: false,
+    api_message: "",
+    data: []
+  })
+
   private http = inject(HttpClient)
   private url: string = `${environment.baseUrl}/api`
 
-  getAllSaveDebtsType(): Observable<DebtsType[]> {
-    return this.http.get<getDebtsTypeResult>(`${this.url}/debtsType`,{
-      headers: this.httpHeaders
-    }).pipe(
-        map(response => response.data),
-        catchError(e => {
-          Swal.fire(
-            'Error Interno',
-            'Ha ocurrido algo grave. Contacte a soporte por favor',
-            'error'
-          )
-          return throwError(() => e)
-        })
-      );
-  }
-
-  saveDebtsType(name: string): Observable<DebtsTypeResult>{
-    return this.http.post<DebtsTypeResult>(`${this.url}/debtsType`, {
-      headers: this.httpHeaders , name
-    }).pipe(
+  getAllSaveDebtsType(): Observable<getDebtsTypeResult> {
+    return this.http.get<getDebtsTypeResult>(`${this.url}/debtsType`)
+      .pipe(
         map(response => response),
-        catchError(e => {
-          Swal.fire(
-            'Error Interno',
-            'Ha ocurrido algo grave. Contacte a soporte por favor',
-            'error'
-          )
-          return throwError(() => e)
-        })
       );
   }
 
-  deleteDebtsType(_id: string): Observable<DebtsTypeResult>{
-    return this.http.delete<DeleteDebtsTypeResult>(`${this.url}/debtsType/${_id}`, {
-      headers: this.httpHeaders ,
-    }).pipe(
+  saveDebtsType(name: string): Observable<getDebtsTypeResult> {
+    return this.http.post<getDebtsTypeResult>(`${this.url}/debtsType`, { name })
+      .pipe(
         map(response => response),
-        catchError(e => {
-          Swal.fire(
-            'Error Interno',
-            'Ha ocurrido algo grave. Contacte a soporte por favor',
-            'error'
-          )
-          return throwError(() => e)
-        })
       );
   }
 
-  saveDebts(debts: Debts): Observable<any> {
-    return this.http.post<any>(`${this.url}/debts/${debts.owner}`,{
-      headers: this.httpHeaders , ...debts
-    }).pipe(
+  deleteDebtsType(_id: string): Observable<getDebtsTypeResult> {
+    return this.http.delete<getDebtsTypeResult>(`${this.url}/debtsType/${_id}`).pipe(
+      map(response => response),
+    );
+  }
+
+  saveDebts(debts: Debts): Observable<getDebtsTypeResult> {
+    return this.http.post<any>(`${this.url}/debts`, debts).pipe(
+      map(response => response),
+    );
+  }
+
+  getAllDebtsDate(date: string, all: boolean = true): Observable<getDebtsResult> {
+
+    if (all) {
+      return this.http.get<getDebtsResult>(`${this.url}/debts`).pipe(
         map(response => response),
-        catchError(e => {
-          Swal.fire(
-            'Error Interno',
-            'Ha ocurrido algo grave. Contacte a soporte por favor',
-            'error'
-          )
-          return throwError(() => e)
-        })
       );
-  }
-
-
-  getAllDebtsDate(date: string , all : boolean = true): Observable<Debts[]> {
-
-    if ( all ) {
-      return this.http.get<getDebtsResult>(`${this.url}/debts`,{
-        headers: this.httpHeaders
-      }).pipe(
-          map(response => response.data),
-          catchError(e => {
-            Swal.fire(
-              'Error Interno',
-              'Ha ocurrido algo grave. Contacte a soporte por favor',
-              'error'
-            )
-            return throwError(() => e)
-          })
-        );
     }
     else
-    return this.http.get<getDebtsResult>(`${this.url}/debts?date=${date}`,{
-      headers: this.httpHeaders
-    }).pipe(
-        map(response => response.data),
-        catchError(e => {
-          Swal.fire(
-            'Error Interno',
-            'Ha ocurrido algo grave. Contacte a soporte por favor',
-            'error'
-          )
-          return throwError(() => e)
-        })
+      return this.http.get<getDebtsResult>(`${this.url}/debts?date=${date}`).pipe(
+        map(response => response),
       );
   }
-
-
-
 }

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, computed, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OperacionesService } from '../../services/operaciones.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { getDate } from '../../help/getDate';
 import { DebtsType } from '../../interfaces/debts.interface';
+import { DeleteDebtsTypeResult, getDebtsTypeResult } from '../../interfaces/response.interface';
 
 @Component({
   selector: 'app-operaciones',
@@ -13,29 +14,21 @@ import { DebtsType } from '../../interfaces/debts.interface';
   templateUrl: './operaciones.component.html',
   styleUrl: './operaciones.component.css'
 })
-export class OperacionesComponent implements OnInit {
+export class OperacionesComponent  {
 
   private fb = inject(FormBuilder);
-  private cdRef = inject(ChangeDetectorRef);
 
-
-  public debtsTypeList: DebtsType[] = [];
-
+  public debtsTypeList = computed<getDebtsTypeResult>( () =>  this.operacionesService.debtsType());
 
   constructor(private operacionesService: OperacionesService) { }
 
   async ngOnInit(){
      this.operacionesService.getAllSaveDebtsType().subscribe(
       data => {
-        this.debtsTypeList = data
-        this.cdRef.detectChanges();
+        this.operacionesService.debtsType.set({...data})
       }
-
       )
-    this.cdRef.detectChanges();
-
   }
-
 
   public debtsForm: FormGroup = this.fb.group({
     type: ['', Validators.required],
@@ -53,12 +46,8 @@ export class OperacionesComponent implements OnInit {
 
     const date = getDate();
     const owner = localStorage.getItem('access-token');
-
     this.debtsForm.controls['owner'].setValue(owner);
     this.debtsForm.controls['date'].setValue(date);
-
-    console.log(this.debtsForm.value);
-
 
     if (!this.debtsForm.valid) this.ShowMessage('Complete todos los campos', 'error');
     else
@@ -97,11 +86,13 @@ export class OperacionesComponent implements OnInit {
         this.operacionesService.saveDebtsType(this.debtsTypeForm.controls['name'].value)
           .subscribe(
             response => {
-              if (response.success) this.ShowMessage('Registro completado', 'success');
+              if (response.success) {
+                this.ShowMessage('Registro completado', 'success');
+                this.operacionesService.debtsType.set({...response})
+              }
               else this.ShowMessage(response.api_message, 'error');
             }
           )
-        this.ngOnInit()
       }
     });
   }
@@ -117,21 +108,18 @@ export class OperacionesComponent implements OnInit {
       confirmButtonText: "Confirmar"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        this.operacionesService.deleteDebtsType(this.debtsTypeList[index]._id)
+        this.operacionesService.deleteDebtsType(this.debtsTypeList().data[index]._id ?? '')
           .subscribe(
             response => {
-              if (response.success) this.ShowMessage('Eliminar completado', 'success');
+              if (response.success) {
+                this.ShowMessage('Eliminar completado', 'success');
+                this.operacionesService.debtsType.set({...response})
+              }
               else this.ShowMessage(response.api_message, 'error');
             }
           )
-        this.ngOnInit()
-
       }
     });
-
-
-
-
   }
 
   async ShowMessage(message: string, icon: SweetAlertIcon) {

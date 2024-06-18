@@ -64,7 +64,7 @@ export class AuthService  {
       return of(false);
     }
 
-    return this.http.post<CheckTokenResponse>(`${url}/${token}`,{})
+    return this.http.post<CheckTokenResponse>(`${url}`,{})
       .pipe(
         map(({success,  api_message, data}) => this.setAuthentication(data.user, data.token)),
           catchError(() => {
