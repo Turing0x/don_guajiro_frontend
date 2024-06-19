@@ -2,6 +2,7 @@
   <div class="recentOrders">
     <form [formGroup]="saleForm" class="cardHeader">
       <h2>Ventas Realizadas</h2>
+
       <p>Importe Total Generado: {{ totalAmount() | currency }}</p>
 
       <div (change)="seachDate()">
