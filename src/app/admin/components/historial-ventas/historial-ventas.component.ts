@@ -32,4 +32,9 @@ export class HistorialVentasComponent {
     )
   }
 
+  totalAmount() {
+    return this.salesList().data.reduce(
+      (acc, item) => acc + item.unities! * item.price!, 0);
+  }
+
 }
