@@ -1,9 +1,8 @@
 import { AuthService } from './auth/services/auth-service.service';
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthStatus } from './auth/interfaces';
 import { UserRole } from './auth/interfaces/roles-users.enum';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',

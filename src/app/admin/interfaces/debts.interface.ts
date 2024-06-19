@@ -1,5 +1,3 @@
-
-
 export interface Debts {
   _id:string,
   type?:DebtsType,
@@ -9,9 +7,8 @@ export interface Debts {
   owner?:string
 }
 
-
 export interface DebtsType{
   _id?:string,
- name?:string;
- status?:boolean;
+  name?:string;
+  status?:boolean;
 }

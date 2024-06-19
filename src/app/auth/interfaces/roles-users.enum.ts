@@ -5,7 +5,6 @@ export enum RolesUsers {
   seller        = 'seller',
 }
 
-
 export interface UserRole {
   admin: string;
   guest: string;

@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap"); */
-html{
-  font-family: "Ubuntu", sans-serif;
+@font-face {
+  font-family: "SpaceG";
+  src: url("./assets/font/SpaceGrotesk-VariableFont_wght.ttf")
+    format("truetype");
+  font-display: swap;
+}
+
+html {
+  font-family: "SpaceG", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -23,7 +29,6 @@ body {
   overflow-x: hidden;
 }
 
-
 .container {
   position: relative;
   width: 100%;
@@ -40,6 +45,7 @@ body {
   overflow: hidden;
   border-radius: 0px 80px 0px 0px;
 }
+
 .navigation.active {
   width: 80px;
 }
@@ -77,6 +83,7 @@ body {
   text-decoration: none;
   color: #fff;
 }
+
 .navigation ul li:hover a,
 .navigation ul li.hovered a {
   color: var(--blue);
@@ -88,7 +95,9 @@ body {
   flex-direction: column-reverse;
   line-height: 75px;
   text-align: center;
+  margin-right: 10px;
 }
+
 .navigation ul li a .icon ion-icon {
   font-size: 1.75rem;
 }
@@ -117,6 +126,7 @@ body {
   box-shadow: 35px 35px 0 10px #fff;
   pointer-events: none;
 }
+
 .navigation ul li:hover a::after,
 .navigation ul li.hovered a::after {
   content: "";
@@ -140,6 +150,7 @@ body {
   background: #fff;
   transition: 0.5s;
 }
+
 .main.active {
   width: calc(100% - 80px);
   left: 80px;
@@ -268,7 +279,6 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 30px;
-  /* margin-top: 10px; */
 }
 
 .details .recentOrders {
@@ -289,12 +299,13 @@ body {
 }
 .cardHeader h2 {
   font-weight: 600;
-  color: #2a2185;;
+  color: #2a2185;
 }
+
 .cardHeader .btn {
   position: relative;
   padding: 5px 10px;
-  background: #2a2185;;
+  background: #2a2185;
   text-decoration: none;
   color: #fff;
   border-radius: 6px;
@@ -305,32 +316,41 @@ body {
   border-collapse: collapse;
   margin-top: 10px;
 }
+
 .details table thead td {
   font-weight: 600;
 }
+
 .details .recentOrders table tr {
   color: var(--black1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 .details .recentOrders table tr:last-child {
   border-bottom: none;
 }
+
 .details .recentOrders table tbody tr:hover {
   background: var(--blue);
   color: var(--white);
 }
+
 .details .recentOrders table tr td {
   padding: 10px;
 }
+
 .details .recentOrders table tr td:last-child {
   text-align: end;
 }
+
 .details .recentOrders table tr td:nth-child(2) {
   text-align: end;
 }
+
 .details .recentOrders table tr td:nth-child(3) {
   text-align: center;
 }
+
 .status.delivered {
   padding: 2px 4px;
   background: #8de02c;
@@ -471,8 +491,6 @@ body {
   }
 }
 
-
-
 .btn-act {
   cursor: pointer;
   color: #8999b0;
@@ -490,7 +508,6 @@ body {
 .btn-act.finish:hover {
   background-color: #48fe76;
   color: rgb(0, 0, 0) !important;
-
 }
 
 .btn-act.info:hover {
@@ -515,7 +532,6 @@ input {
   border-radius: 5px;
   background-color: rgb(239, 239, 239);
 }
-
 
 /* ================== Order Details List ============== */
 .details {
@@ -547,7 +563,7 @@ input {
 }
 .cardHeader h2 {
   font-weight: 600;
-  color: #2a2185;;
+  color: #2a2185;
 }
 .cardHeader .btn {
   position: relative;
@@ -574,25 +590,39 @@ input {
   color: var(--black1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 .details .recentOrders table tr:last-child {
   border-bottom: none;
 }
+
 .details .recentOrders table tbody tr:hover {
-  background: var(--blue);
+  background: #4c43b0;
   color: var(--white);
 }
+
 .details .recentOrders table tr td {
   padding: 10px;
 }
+
+.details .recentOrders table tr td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
 .details .recentOrders table tr td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
   text-align: end;
 }
+
 .details .recentOrders table tr td:nth-child(2) {
   text-align: end;
 }
+
 .details .recentOrders table tr td:nth-child(3) {
   text-align: center;
 }
+
 .status.delivered {
   padding: 2px 4px;
   background: #8de02c;
@@ -642,6 +672,7 @@ input {
   border-radius: 50px;
   overflow: hidden;
 }
+
 .recentCustomers .imgBx img {
   position: absolute;
   top: 0;
@@ -650,49 +681,50 @@ input {
   height: 100%;
   object-fit: cover;
 }
+
 .recentCustomers table tr td {
   padding: 12px 10px;
 }
+
 .recentCustomers table tr td h4 {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.2rem;
 }
+
 .recentCustomers table tr td h4 span {
   font-size: 14px;
   color: var(--black2);
 }
+
 .recentCustomers table tr:hover {
-  background: #2a2185;;
+  background: #2a2185;
   color: #fff;
 }
+
 .recentCustomers table tr:hover td h4 span {
   color: var(--white);
 }
 
-
 .loading-info-container {
   display: grid;
 
-    justify-content: center;
-
+  justify-content: center;
 }
 
-.loading-info{
+.loading-info {
+  margin: 50px 0;
   width: 50vh;
   height: 50vh;
 }
 
-
-.update-icons{
-
+.update-icons {
   padding: 5px;
-border-radius: 8px;
-cursor: pointer;
-  }
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-  .update-icons:hover {
+.update-icons:hover {
   background-color: #2a2185;
   color: #ffffff;
-
 }
