@@ -4,57 +4,58 @@
       <h2>Ventas Realizadas</h2>
 
       <p>Importe Total Generado: {{ totalAmount() | currency }}</p>
-
-      <div (change)="seachDate()">
+      <div style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      ">
+       <div (change)="seachDate()">
         <span for="date">Fecha:</span>
-        <input
-          id="date"
-          type="date"
-          formControlName="date"
-          name=""
-          id=""
-          style="width: 150px"
-          (change)="seachDate()"
-        />
+        <input id="date" type="date" formControlName="date" name="" id="" style="width: 150px"
+          (change)="seachDate()"/>
       </div>
+        <button title="Guardar la operación" class="btn" (click)="crearPdf()" style="display: flex; gap: 8px">
+          <span> Descargar Informe </span>
+          <span>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+          </span>
+        </button>
+      </div>
+
     </form>
 
-    @if( salesList().data.length <= 0 ){ @if(salesList().success){
-    <div class="loading-info-container">
-      <img
-        class="loading-info"
-        src="../../../../assets/img/loadin-info.jpg"
-        alt="Imagen: No encontrado"
-      />
+    @if( salesList().data.length <= 0 ){ @if(salesList().success){ <div class="loading-info-container">
+      <img class="loading-info" src="../../../../assets/img/loadin-info.jpg" alt="Imagen: No encontrado" />
       <h2 style="color: #2a2185">
         No existe ninguna Coincidencia para la Busqueda
       </h2>
-    </div>
-    } @else {
-    <h1>Cargando data.....</h1>
-    } } @else {
-    <table>
-      <thead>
-        <tr>
-          <td>Producto</td>
-          <td>Fecha</td>
-          <td>Cantidad Comprada</td>
-          <td>Precio/U</td>
-          <td>Importe de venta</td>
-        </tr>
-      </thead>
-      <tbody>
-        @for (item of salesList().data ; track $index) {
-        <tr>
-          <td>{{ item.product | titlecase }}</td>
-          <td>{{ item.date }}</td>
-          <td>{{ item.cantToBuy }}</td>
-          <td>{{ item.price | currency }}</td>
-          <td>{{ item.unities! * item.price! | currency }}</td>
-        </tr>
-        }
-      </tbody>
-    </table>
-    }
   </div>
+  } @else {
+  <h1>Cargando data.....</h1>
+  } } @else {
+  <table>
+    <thead>
+      <tr>
+        <td>Producto</td>
+        <td>Fecha</td>
+        <td>Cantidad Comprada</td>
+        <td>Precio/U</td>
+        <td>Importe de venta</td>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of salesList().data ; track $index) {
+      <tr>
+        <td>{{ item.product | titlecase }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.cantToBuy }}</td>
+        <td>{{ item.price | currency }}</td>
+        <td>{{ item.unities! * item.price! | currency }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+</div>
 </div>
