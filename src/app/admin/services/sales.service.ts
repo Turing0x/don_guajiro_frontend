@@ -37,7 +37,6 @@ export class SalesService {
   }
 
   markSaleAsFinished(id: any, all: boolean = false) {
-    this.resetSiganalSales();
     if (all) {
       return this.http.put<getSalesResult>
         (`${this.url}/${id[0]}`, { list_id: id });
