@@ -3,7 +3,6 @@
     <form [formGroup]="saleForm" class="cardHeader">
       <h2>Ventas Realizadas</h2>
 
-      <p>Importe Total Generado: {{ totalAmount() | currency }}</p>
       <div style="
         display: flex;
         align-items: center;
@@ -13,9 +12,9 @@
        <div (change)="seachDate()">
         <span for="date">Fecha:</span>
         <input id="date" type="date" formControlName="date" name="" id="" style="width: 150px"
-          (change)="seachDate()"/>
+          />
       </div>
-        <button title="Guardar la operación" class="btn" (click)="crearPdf()" style="display: flex; gap: 8px">
+        <button title="Guardar la operación" class="btn" (click)="clickPDF()" style="display: flex; gap: 8px">
           <span> Descargar Informe </span>
           <span>
             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
@@ -34,6 +33,10 @@
   } @else {
   <h1>Cargando data.....</h1>
   } } @else {
+    <div style="display: flex; justify-content: end; margin-top: 10px;">Importe Total Generado:
+      <span style="color: #2a2185;"> {{amountTotal().total | currency}}</span>
+    </div>
+
   <table>
     <thead>
       <tr>
@@ -51,7 +54,7 @@
         <td>{{ item.date }}</td>
         <td>{{ item.cantToBuy }}</td>
         <td>{{ item.price | currency }}</td>
-        <td>{{ item.unities! * item.price! | currency }}</td>
+        <td>{{ item.cantToBuy! * item.price! | currency }}</td>
       </tr>
       }
     </tbody>

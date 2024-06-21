@@ -18,6 +18,7 @@ export class SalesService {
     api_message: "",
     data: []
   })
+  public amountTotal = signal<{total:number}>({total: 0});
 
   getAllSaleDate(date: string, pending: boolean) {
     this.resetSiganalSales();

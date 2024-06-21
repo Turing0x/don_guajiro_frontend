@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component, computed, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, inject } from '@angular/core';
 
 import { getSalesResult } from '../../interfaces/response.interface';
 import { SalesService } from '../../services/sales.service';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { getDate } from '../../help/getDate';
 import { CreatePdfService } from '../../services/create.pdf.service';
 import pdfMake from 'pdfmake/build/pdfmake';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-historial-ventas',
@@ -21,7 +22,9 @@ export class HistorialVentasComponent {
   public salesList = computed<getSalesResult>
     (() => this.salesService.sales());
 
-  constructor(public salesService: SalesService) { }
+  public amountTotal = computed<{total:number}>(() =>  this.salesService.amountTotal());
+
+  constructor(public salesService: SalesService  , private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void { this.seachDate(getDate()); }
 
@@ -30,22 +33,32 @@ export class HistorialVentasComponent {
   });
 
   seachDate(date?: string) {
+
     if (!date) date = getDate(this.saleForm.controls['date'].value);
     this.salesService.getAllSaleDate(date, false).subscribe(
-      data => { this.salesService.sales.set({ ...data }) }
+      data => {
+        this.salesService.sales.set({ ...data })
+        this.salesService.amountTotal.set({total: this.totalAmountcalc()});
+      }
     )
   }
-
-  totalAmount() {
-    return this.salesList().data.reduce(
-      (acc, item) => acc + item.unities! * item.price!, 0);
+  totalAmountcalc():number {
+    let valor = 0;
+    this.salesList().data.forEach(item => {
+      valor += item.cantToBuy! * item.price!;
+    });
+    return valor;
   }
 
-  crearPdf() {
-    let date: string = '';
+  clickPDF() {
+    if(this.salesList().data.length === 0){
+      Swal.fire('No hay datos', 'No hay datos para generar el Informe(.pdf)', 'warning');
+    }
+    else {
+      let date: string = '';
     (!this.saleForm.controls['date'].value) ? date = getDate(): date = getDate(this.saleForm.controls['date'].value);
     const pdf = pdfMake.createPdf(this.createPdfService.downloadPdf(date,  this.salesList().data));
     pdf.download(`Informe-${date}.pdf`);
+    }
   }
-
 }
