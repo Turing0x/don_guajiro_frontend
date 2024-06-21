@@ -29,18 +29,20 @@ export class LoginComponent {
 
     this.authService.login(username, password).subscribe(
       resp => {
-        if (resp.data.role === 'admin') {
-          this.authService.setAuthentication({
-            _id: resp.data.userID, 
-            username: resp.data.username,
-            role: resp.data.role,
-          }, resp.data.token);
-          this.router.navigateByUrl('/admin/operaciones')
-        }
-        else {
-          this.router.navigateByUrl('/login')
-          Swal.fire('Error', 'Usted no es Administrador', 'error');
-        }
+        if (!resp.success) Swal.fire('Error', 'Credenciales Incorrectas', 'error');
+        else
+          if (resp.data.role === 'admin') {
+            this.authService.setAuthentication({
+              _id: resp.data.userID,
+              username: resp.data.username,
+              role: resp.data.role,
+            }, resp.data.token);
+            this.router.navigateByUrl('/admin/operaciones')
+          }
+          else {
+            this.router.navigateByUrl('/login')
+            Swal.fire('Error', 'Usted no es Administrador', 'error');
+          }
       }
     )
 

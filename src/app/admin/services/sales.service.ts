@@ -31,11 +31,13 @@ export class SalesService {
   }
 
   getAllSale(pending: boolean): Observable<getSalesResult> {
+    this.resetSiganalSales();
     return this.http.get<getSalesResult>
       (`${this.url}/pendingAll/${pending}`);
   }
 
   markSaleAsFinished(id: any, all: boolean = false) {
+    this.resetSiganalSales();
     if (all) {
       return this.http.put<getSalesResult>
         (`${this.url}/${id[0]}`, { list_id: id });
