@@ -728,3 +728,16 @@ input {
   background-color: #2a2185;
   color: #ffffff;
 }
+
+
+.btn.btn-clean {
+  display: flex;
+  gap: 8px;
+  background: #fff ;
+  color: #000
+}
+.btn.btn-clean:hover {
+  background-color: #ff6060;
+  color: #fff;
+  transition: 0.3s;
+}

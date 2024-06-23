@@ -50,7 +50,7 @@ export interface SalePdf {
   providedIn: 'root'
 })
 export class CreatePdfService {
-  downloadPdf(date: string, array: Sale[]): TDocumentDefinitions {
+  downloadPdf(date: string, array: Sale[] , name: String): TDocumentDefinitions {
     const arraySales:SalePdf[] = this.resumenVentas(array);
 
     let importeTotal = 0, totalProductos = 0;
@@ -90,10 +90,7 @@ export class CreatePdfService {
             {
               text: [
                 { text: 'MIPYME Don Guajiro\n', style: 'h1', },
-                {
-                  link: 'https://google.com',
-                  text: 'https://Don-Guajiro.com',
-                },
+                { text: name,  },
               ],
             },
             {

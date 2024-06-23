@@ -1,0 +1,76 @@
+
+<div class="details">
+  <div class="recentOrders">
+    <div class="cardHeader">
+      <h2>Control de Productos</h2>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        "
+      >
+        <button
+          title="Limpiar todos los datos"
+          class="btn btn-clean"
+        >
+          <span> Limpiar Datos </span>
+          <span>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eraser"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 20h-10.5l-4.21 -4.3a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9.2 9.3" /><path d="M18 13.3l-6.3 -6.3" /></svg>
+          </span>
+        </button>
+        <button
+        title="Guardar el nuevo producto"
+        class="btn"
+        style="display: flex; gap: 8px"
+      >
+        <span> Guardar </span>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"
+            />
+            <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M14 4l0 4l-6 0l0 -4" />
+          </svg>
+        </span>
+      </button>
+      </div>
+    </div>
+    <form class="cont-register" [formGroup]="debtsForm">
+      <div>
+        <label for="select-entity">Selecciona la Entidad:</label>
+        <select id="select-entity" name="" id="" formControlName="entity">
+          <!-- @for (item of debtsTypeList().data; track $index) {
+          <option value="{{ item._id }}">{{ item.name | titlecase }}</option>
+          } -->
+        </select>
+      </div>
+      <div>
+        <label for="name">Nombre del Producto</label>
+        <input type="text" id="name" formControlName="name" />
+      </div>
+      <div>
+        <label for="money">Precio</label>
+        <input type="number" id="money" formControlName="money" />
+      </div>
+      <div>
+        <label for="cantToBuy">En Existencia</label>
+        <input type="text" id="cantToBuy" formControlName="cantToBuy"/>
+      </div>
+    </form>
+  </div>
+</div>
