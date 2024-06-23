@@ -9,6 +9,7 @@ import { CreatePdfService } from '../../services/create.pdf.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import Swal from 'sweetalert2';
 import { Sale } from '../../interfaces/sales.interface';
+import { entity } from '../../help/entity';
 
 @Component({
   selector: 'app-historial-ventas',
@@ -20,6 +21,7 @@ export class HistorialVentasComponent {
 
   private fb = inject(FormBuilder);
   private createPdfService = inject(CreatePdfService);
+  public entity = entity;
   public salesList = computed<getSalesResult>
     (() => this.salesService.sales());
 
@@ -30,21 +32,13 @@ export class HistorialVentasComponent {
   ngOnInit(): void { this.seachDate(getDate()); }
 
   public saleForm: FormGroup = this.fb.group({
-    date: ['', Validators.required], entity:['all'] });
+    date: ['', Validators.required], entity:['66771f5946faf5ab7ac89d08'] });
 
   seachDate(date?: string) {
-
     if (!date) date = getDate(this.saleForm.controls['date'].value);
-    this.salesService.getAllSaleDate(date, false).subscribe(
+    this.salesService.getAllSaleDate(date, this.saleForm.controls['entity'].value).subscribe(
       data => {
-        this.salesService.sales.set({
-          success: true,
-          api_message: '',
-          data: (this.saleForm.controls['entity'].value === 'all')
-            ? data.data : data.data.filter(
-              (item) => item.entity ===
-                this.saleForm.controls['entity'].value)
-        })
+        this.salesService.sales.set({ ...data })
         this.salesService.amountTotal.set({total: this.totalAmountcalc()});
       }
     )
@@ -59,15 +53,10 @@ export class HistorialVentasComponent {
   }
 
   clickPDF() {
-    const namePdf = (this.saleForm.controls['entity'].value === '66771f5946faf5ab7ac89d08') ? 'Tienda de Accesorios' : 'Tienda de Productos Varios';
-    if(this.salesList().data.length === 0){
-      Swal.fire('No hay datos', 'No hay datos para generar el Informe(.pdf)', 'warning');
-    }
-    else {
-      let date: string = '';
+    const namePdf = (this.saleForm.controls['entity'].value === entity.entity_01.id) ? entity.entity_01.name : entity.entity_02.name ;
+    let date: string = '';
     (!this.saleForm.controls['date'].value) ? date = getDate(): date = getDate(this.saleForm.controls['date'].value);
     const pdf = pdfMake.createPdf(this.createPdfService.downloadPdf(date,  this.salesList().data , namePdf ));
     pdf.download(`${namePdf}-${date}.pdf`);
-    }
   }
 }

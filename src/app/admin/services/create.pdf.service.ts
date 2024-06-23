@@ -91,6 +91,7 @@ export class CreatePdfService {
               text: [
                 { text: 'MIPYME Don Guajiro\n', style: 'h1', },
                 { text: name,  },
+                { text: '\n\n', style: 'h1', },
               ],
             },
             {
@@ -104,11 +105,11 @@ export class CreatePdfService {
         },
 
         // Código QR con la dirección
-        {
-          qr: 'https://Don-Guajiro.com',
-          fit: 100,
-          alignment: 'right',
-        },
+        // {
+        //   qr: 'https://Don-Guajiro.com',
+        //   fit: 100,
+        //   alignment: 'right',
+        // },
 
         // Datos del cliente
         {
