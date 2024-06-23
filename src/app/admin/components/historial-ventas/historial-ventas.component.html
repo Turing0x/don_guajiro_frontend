@@ -7,17 +7,33 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 30px;
       ">
-       <div (change)="seachDate()">
-        <span for="date">Fecha:</span>
-        <input id="date" type="date" formControlName="date" name="" id="" style="width: 150px"
-          />
-      </div>
-        <button title="Guardar la operación" class="btn" (click)="clickPDF()" style="display: flex; gap: 8px">
+        <div (change)="seachDate()" style="display: flex; align-items: center; gap: 10px;">
+          <span for="select-entity">Entidad:</span>
+          <select id="select-entity" name="" id="" formControlName="entity" style="width: 250px;">
+            <option value="all">Todas</option>
+            <option value="66771f5946faf5ab7ac89d08">Tienda de Accesorios</option>
+            <option value="66771f6e46faf5ab7ac89d0a">Tienda de Productos Varios</option>
+          </select>
+        </div>
+        <div (change)="seachDate()" style="display: flex; align-items: center; gap: 10px;">
+          <span for="date">Fecha:</span>
+          <input id="date" type="date" formControlName="date" name="" id="" style="width: 150px" />
+        </div>
+        <button [ngStyle]="{'background-color': saleForm.controls['entity'].value === 'all' ? '#BBB5F4' : ''}"
+          [disabled]="saleForm.controls['entity'].value === 'all'" title="Guardar la operación" class="btn"
+          (click)="clickPDF()" style="display: flex; gap: 8px">
           <span> Descargar Informe </span>
           <span>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-download">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+              <path d="M7 11l5 5l5 -5" />
+              <path d="M12 4l0 12" />
+            </svg>
           </span>
         </button>
       </div>
@@ -33,9 +49,9 @@
   } @else {
   <h1>Cargando data.....</h1>
   } } @else {
-    <div style="display: flex; justify-content: end; margin-top: 10px;">Importe Total Generado:
-      <span style="color: #2a2185;"> {{amountTotal().total | currency}}</span>
-    </div>
+  <div style="display: flex; justify-content: end; margin-top: 10px;">Importe Total Generado:
+    <span style="color: #2a2185;"> {{amountTotal().total | currency}}</span>
+  </div>
 
   <table>
     <thead>

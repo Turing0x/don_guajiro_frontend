@@ -7,4 +7,5 @@ export interface Sale {
   date?:        string;
   cantToBuy?:   number;
   unities?:     number;
+  entity?:      string;
 }

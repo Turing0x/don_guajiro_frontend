@@ -22,7 +22,7 @@ export class SalesService {
 
   getAllSaleDate(date: string, pending: boolean) {
     this.resetSiganalSales();
-    return this.http.get<getDebtsTypeResult>
+    return this.http.get<getSalesResult>
       (`${this.url}?date=${date}&pending=${pending}`);
   }
 
