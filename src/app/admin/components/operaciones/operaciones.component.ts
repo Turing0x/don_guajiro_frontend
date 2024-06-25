@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component, computed, inject } from '@angular/core';
+import { AfterViewInit, Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { getDebtsTypeResult } from '../../interfaces/response.interface';
@@ -13,7 +13,7 @@ import { getDate } from '../../help/getDate';
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './operaciones.component.html'
 })
-export class OperacionesComponent  {
+export class OperacionesComponent {
 
   private fb = inject(FormBuilder);
 
@@ -21,6 +21,17 @@ export class OperacionesComponent  {
     (() => this.operacionesService.debtsType());
 
   constructor(private operacionesService: OperacionesService) { }
+  // ngAfterViewInit(): void {
+  //   const saveButton = document.getElementById("save-button-debts");
+
+  //   saveButton?.addEventListener("keydown", (event) => {
+  //     if (event.key === "Enter") {
+  //       // Llama a la función que deseas ejecutar aquí
+  //       console.log('siiii');
+
+  //     }
+  //   });
+  // }
 
   async ngOnInit(){
     this.operacionesService.getAllSaveDebtsType().subscribe(

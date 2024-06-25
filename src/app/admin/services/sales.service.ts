@@ -20,10 +20,10 @@ export class SalesService {
   })
   public amountTotal = signal<{total:number}>({total: 0});
 
-  getAllSaleDate(date: string, pending: boolean) {
+  getAllSaleDate(date: string, entity: string) {
     this.resetSiganalSales();
     return this.http.get<getSalesResult>
-      (`${this.url}?date=${date}&pending=${pending}`);
+      (`${this.url}?date=${date}&entity=${entity}`);
   }
 
   autorizar(): Observable<getSalesResult> {

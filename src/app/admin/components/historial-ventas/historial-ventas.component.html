@@ -12,17 +12,16 @@
         <div (change)="seachDate()" style="display: flex; align-items: center; gap: 10px;">
           <span for="select-entity">Entidad:</span>
           <select id="select-entity" name="" id="" formControlName="entity" style="width: 250px;">
-            <option value="all">Todas</option>
-            <option value="66771f5946faf5ab7ac89d08">Tienda de Accesorios</option>
-            <option value="66771f6e46faf5ab7ac89d0a">Tienda de Productos Varios</option>
+            <option [value]="entity.entity_01.id" [defaultSelected]="true">{{entity.entity_01.name}}</option>
+            <option [value]="entity.entity_02.id">{{entity.entity_02.name}}</option>
           </select>
         </div>
         <div (change)="seachDate()" style="display: flex; align-items: center; gap: 10px;">
           <span for="date">Fecha:</span>
           <input id="date" type="date" formControlName="date" name="" id="" style="width: 150px" />
         </div>
-        <button [ngStyle]="{'background-color': saleForm.controls['entity'].value === 'all' ? '#BBB5F4' : ''}"
-          [disabled]="saleForm.controls['entity'].value === 'all'" title="Guardar la operación" class="btn"
+        <button [ngStyle]="{'background-color': salesList().data.length <= 0 ? '#BBB5F4' : ''}"
+          [disabled]="salesList().data.length <= 0" title="Guardar la operación" class="btn"
           (click)="clickPDF()" style="display: flex; gap: 8px">
           <span> Descargar Informe </span>
           <span>

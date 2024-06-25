@@ -30,8 +30,11 @@ export class PendientesComponent {
   });
 
   seachDate(date?: string) {
+
+
+
     if( !date ) date = getDate(this.saleForm.controls['date'].value);
-    this.salesService.getAllSaleDate( date , true).subscribe(
+    this.salesService.getAllSaleDate( date , '').subscribe(
       data => {
         this.salesService.sales.set({...data})
       }
@@ -59,7 +62,7 @@ export class PendientesComponent {
     else {
       this.salesService.markSaleAsFinished(
         id, false).subscribe();
-    
+
       this.salesService.sales().data =
         this.salesService.sales().data.filter(
           element => element._id !== id);
