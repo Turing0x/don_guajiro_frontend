@@ -17,7 +17,7 @@
             type="text"
             placeholder="Nombre de usuario"
             formControlName="username"
-            class="w-full px-4 py-2 border rounded-lg text-zinc-700 dark:text-zinc-400 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
+            class="w-full px-4 py-2 border rounded-lg text-zinc-700 dark:text-black focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
             required
           />
         </div>
@@ -26,17 +26,18 @@
             type="password"
             placeholder="Contraseña"
             formControlName="password"
-            class="w-full px-4 py-2 border rounded-lg text-zinc-700 dark:text-zinc-400 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
+            class="w-full px-4 py-2 border rounded-lg text-zinc-700 dark:text-black focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
             required
           />
         </div>
         <button
           title="Acceder de forma segura a la plataforma"
-          [disabled]="myForm.invalid"
+          [disabled]="myForm.invalid || gettingData"
+          [ngClass]="{ 'cursor-not-allowed bg-gray-300': gettingData }"
           type="submit"
           class="flex justify-center w-full bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-300"
         >
-          Acceder a mi cuenta
+          {{ gettingData ? 'Intentando iniciar sesión...' : 'Acceder a mi cuenta' }}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="ml-4 icon icon-tabler icon-tabler-login-2"
