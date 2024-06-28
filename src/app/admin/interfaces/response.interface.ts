@@ -1,4 +1,5 @@
 import { Debts, DebtsType } from "./debts.interface"
+import { Product } from "./product.interface"
 import { Sale } from "./sales.interface"
 
 export interface DebtsTypeResult {
@@ -29,4 +30,10 @@ export interface getDebtsResult {
   success: boolean
   api_message: string,
   data: Debts[]
+}
+
+export interface getProductsResult {
+  success: boolean
+  api_message: string,
+  data: Product[]
 }

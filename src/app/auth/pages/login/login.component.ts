@@ -26,14 +26,9 @@ export class LoginComponent {
   login() {
 
     const { username, password } = this.myForm.value;
-    Swal.fire({
-      title: 'Cargando!',
-      html: 'Espere mientras se cargan los datos... <b></b>',
-    })
 
     this.authService.login(username, password).subscribe(
       resp => {
-        Swal.close();
         if (!resp.success) Swal.fire('Error', 'Credenciales Incorrectas', 'error');
         else
           if (resp.data.role === 'admin') {

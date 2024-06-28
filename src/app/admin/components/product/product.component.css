@@ -1,3 +1,14 @@
 :host {
   display: block;
 }
+
+.actions {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+}
+
+.btn-act.edit:hover {
+  background-color: #219653;
+  color: white !important;
+}

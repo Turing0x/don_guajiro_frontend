@@ -1,76 +1,180 @@
-
 <div class="details">
-  <div class="recentOrders">
+  <form class="recentOrders" [formGroup]="productForm" >
     <div class="cardHeader">
       <h2>Control de Productos</h2>
-      <div
-        style="
+      <div  style="display: flex; align-items: center; gap: 10px;">
+        <span for="select-entity" >Entidad:</span>
+        <select id="select-entity" (change)="getAllProduct()" name="" id="" formControlName="entity" style="width: 250px;">
+          <option [value]="entity.entity_01.id">{{entity.entity_01.name}}</option>
+          <option [value]="entity.entity_02.id">{{entity.entity_02.name}}</option>
+        </select>
+      </div>
+      <div style="
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 10px;
-        "
-      >
-        <button
-          title="Limpiar todos los datos"
-          class="btn btn-clean"
-        >
+        ">
+        <button title="Limpiar todos los datos" class="btn btn-clean" (click)="resetForm()">
           <span> Limpiar Datos </span>
           <span>
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eraser"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 20h-10.5l-4.21 -4.3a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9.2 9.3" /><path d="M18 13.3l-6.3 -6.3" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-eraser">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M19 20h-10.5l-4.21 -4.3a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9.2 9.3" />
+              <path d="M18 13.3l-6.3 -6.3" />
+            </svg>
           </span>
         </button>
         <button
-        title="Guardar el nuevo producto"
-        class="btn"
-        style="display: flex; gap: 8px"
-      >
-        <span> Guardar </span>
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path
-              d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"
-            />
-            <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-            <path d="M14 4l0 4l-6 0l0 -4" />
-          </svg>
-        </span>
-      </button>
+        (click)="onSubmit()"
+        type="submit" title="Guardar el nuevo producto" class="btn" style="display: flex; gap: 8px"
+          [disabled]="productForm.disabled">
+          <span> {{ editing === true ? "Editar" : "Guardar" }} </span>
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+              <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              <path d="M14 4l0 4l-6 0l0 -4" />
+            </svg>
+          </span>
+        </button>
       </div>
     </div>
-    <form class="cont-register" [formGroup]="debtsForm">
-      <div>
-        <label for="select-entity">Selecciona la Entidad:</label>
-        <select id="select-entity" name="" id="" formControlName="entity">
-          <!-- @for (item of debtsTypeList().data; track $index) {
-          <option value="{{ item._id }}">{{ item.name | titlecase }}</option>
-          } -->
-        </select>
-      </div>
+    <div class="cont-register">
+
       <div>
         <label for="name">Nombre del Producto</label>
         <input type="text" id="name" formControlName="name" />
       </div>
       <div>
-        <label for="money">Precio</label>
-        <input type="number" id="money" formControlName="money" />
+        <label for="price">Precio</label>
+        <input type="number" id="price" formControlName="price" />
       </div>
       <div>
-        <label for="cantToBuy">En Existencia</label>
-        <input type="text" id="cantToBuy" formControlName="cantToBuy"/>
+        <label for="inStock">Cantidad en Almacen:</label>
+        <input type="number" id="inStock" formControlName="inStock" />
       </div>
-    </form>
+    </div>
+  </form>
+
+
+</div>
+
+<div class="details">
+  <div class="recentOrders">
+    <div class="cardHeader">
+      <h2>Historial de Productos en el Sistema</h2>
+
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <td>Nombre</td>
+          <td>Precio</td>
+          <td>Cantidad en Almacen</td>
+          <td> Acciones </td>
+
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of productList().data; track $index) {
+        <tr>
+          <td>{{ item.name | titlecase }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.inStock }}</td>
+          <td>
+            <div class="actions">
+              <!-- <button
+                class="btn-act info"
+                title="Ver toda la información del producto"
+                (click)="putTuEdit(item)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-info-square-rounded"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M12 9h.01" />
+                  <path d="M11 12h1v4h1" />
+                  <path
+                    d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"
+                  />
+                </svg>
+              </button> -->
+
+              <button
+              (click)="putTuEdit(item, true)"
+                class="btn-act edit"
+                title="Editar la información de esta entidad"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path
+                    d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"
+                  />
+                  <path
+                    d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"
+                  />
+                  <path d="M16 5l3 3" />
+                </svg>
+              </button>
+
+              <button
+              (click)="deleteProduct(item._id!)"
+                class="btn-act delete"
+                title="Eliminar del sistema esta entidad"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M4 7l16 0" />
+                  <path d="M10 11l0 6" />
+                  <path d="M14 11l0 6" />
+                  <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                  <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
   </div>
 </div>
