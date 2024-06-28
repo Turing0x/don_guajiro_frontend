@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import 'sweetalert2/src/sweetalert2.scss'
 import { alertLoading } from '../../help/alert-loading';
 import { entity } from '../../help/entity';
 import { ProductService } from '../../services/product.service';

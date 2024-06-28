@@ -10,6 +10,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import Swal from 'sweetalert2';
 import { Sale } from '../../interfaces/sales.interface';
 import { entity } from '../../help/entity';
+import { alertLoading } from '../../help/alert-loading';
 
 @Component({
   selector: 'app-historial-ventas',
@@ -35,9 +36,11 @@ export class HistorialVentasComponent {
     date: ['', Validators.required], entity:['66771f5946faf5ab7ac89d08'] });
 
   seachDate(date?: string) {
+    alertLoading();
     if (!date) date = getDate(this.saleForm.controls['date'].value);
     this.salesService.getAllSaleDate(date, this.saleForm.controls['entity'].value).subscribe(
       data => {
+        Swal.close();
         this.salesService.sales.set({ ...data })
         this.salesService.amountTotal.set({total: this.totalAmountcalc()});
       }
@@ -53,10 +56,12 @@ export class HistorialVentasComponent {
   }
 
   clickPDF() {
+    alertLoading();
     const namePdf = (this.saleForm.controls['entity'].value === entity.entity_01.id) ? entity.entity_01.name : entity.entity_02.name ;
     let date: string = '';
     (!this.saleForm.controls['date'].value) ? date = getDate(): date = getDate(this.saleForm.controls['date'].value);
     const pdf = pdfMake.createPdf(this.createPdfService.downloadPdf(date,  this.salesList().data , namePdf ));
     pdf.download(`${namePdf}-${date}.pdf`);
+    Swal.close();
   }
 }

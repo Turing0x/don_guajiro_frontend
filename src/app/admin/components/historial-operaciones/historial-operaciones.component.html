@@ -4,54 +4,38 @@
       <h2>Historial de Operaciones en el Sistema</h2>
       <form [formGroup]="saleForm">
         <span for="date">Fecha:</span>
-        <input
-          id="date"
-          type="date"
-          formControlName="date"
-          name=""
-          id=""
-          style="width: 150px"
-          (change)="seachDate(false)"
-        />
+        <input id="date" type="date" formControlName="date" name="" id="" style="width: 150px"
+          (change)="seachDate(false)" />
       </form>
     </div>
 
-    @if( debtsList().data.length <= 0 ){ @if(debtsList().success){
-    <div class="loading-info-container">
-      <img
-        class="loading-info"
-        src="../../../../assets/img/loadin-info.jpg"
-        alt="Imagen: No encontrado"
-      />
+    @if( debtsList().data.length <= 0 ){ <div class="loading-info-container">
+      <img class="loading-info" src="../../../../assets/img/loadin-info.jpg" alt="Imagen: No encontrado" />
       <h2 style="color: #2a2185">
         No existe ninguna Coincidencia para la Busqueda
       </h2>
-    </div>
-    } @else {
-    <div class="loading-info-container">
-      <h2 style="color: #2a2185">Cargando Elementos...</h2>
-    </div>
-    } } @else {
-    <table>
-      <thead>
-        <tr>
-          <td>Tipo de Operación</td>
-          <td>Dinero</td>
-          <td>Fecha</td>
-          <td>Descripción</td>
-        </tr>
-      </thead>
-      <tbody>
-        @for (item of debtsList().data; track $index) {
-        <tr>
-          <td>{{ item.type?.name | titlecase }}</td>
-          <td>{{ item.money }}</td>
-          <td>{{ item.date }}</td>
-          <td>{{ item.description | titlecase }}</td>
-        </tr>
-        }
-      </tbody>
-    </table>
-    }
   </div>
+  } @else {
+  <table>
+    <thead>
+      <tr>
+        <td>Tipo de Operación</td>
+        <td>Dinero</td>
+        <td>Fecha</td>
+        <td>Descripción</td>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of debtsList().data; track $index) {
+      <tr>
+        <td>{{ item.type?.name | titlecase }}</td>
+        <td>{{ item.money }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.description | titlecase }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+</div>
 </div>
