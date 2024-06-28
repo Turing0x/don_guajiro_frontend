@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,17 +19,21 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router)
 
+  public gettingData = false;
+
   public myForm: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
 
   login() {
-
+    this.gettingData = true;
     const { username, password } = this.myForm.value;
 
     this.authService.login(username, password).subscribe(
       resp => {
+        this.gettingData = false;
+
         if (!resp.success) Swal.fire('Error', 'Credenciales Incorrectas', 'error');
         else
           if (resp.data.role === 'admin') {
