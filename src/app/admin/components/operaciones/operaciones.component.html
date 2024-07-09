@@ -48,11 +48,17 @@
   <div class="recentOrders">
     <form class="cardHeader" (submit)="SaveDebtsType()" [formGroup]="debtsTypeForm">
       <h2>Tipos de Operaciones</h2>
-      <div class="tipo-operacion">
+      <div>
         <div>
-          <input style="width: 60vh" type="text" formControlName="name" placeholder="Descripción del tipo de operación"
+          <input type="text" formControlName="name" placeholder="Descripción del tipo de operación"
             style="min-width: 300px" />
         </div>
+      </div>
+      <div>
+        <select  style="width: 32vh" id="select-operacion" name="" id="" formControlName="side">
+          <option value=true>Incremento</option>
+          <option value=false>Decremento</option>
+        </select>
       </div>
       <div style="
           display: flex;
@@ -88,6 +94,7 @@
       <tr>
         <td>Número</td>
         <td>Nombre</td>
+        <td>Side</td>
         <td>Eliminar</td>
       </tr>
     </thead>
@@ -96,6 +103,13 @@
       <tr>
         <td># - {{ $index + 1 }}</td>
         <td>{{ item.name | titlecase }}</td>
+        @if (item.side === true) {
+          <td style="color: green;">Incremento</td>
+        }
+        @else {
+          <td style="color: red;">Decremento</td>
+
+        }
         <td>
           <button (click)="deleteDebtsType($index)" class="btn-act delete" title="Eliminar del sistema esta entidad">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

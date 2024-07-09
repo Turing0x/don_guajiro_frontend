@@ -21,6 +21,7 @@
       <tr>
         <td>Tipo de Operación</td>
         <td>Dinero</td>
+        <td>Efecto</td>
         <td>Fecha</td>
         <td>Descripción</td>
       </tr>
@@ -29,7 +30,14 @@
       @for (item of debtsList().data; track $index) {
       <tr>
         <td>{{ item.type?.name | titlecase }}</td>
-        <td>{{ item.money }}</td>
+        @if( item.type?.side === true) {
+          <td style="color: green;">{{item.money}}</td>
+          <td style="color: green;">Incremento</td>
+        }
+        @else {
+          <td style="color: red;">{{item.money}}</td>
+          <td style="color: red;">Decremento</td>
+        }
         <td>{{ item.date }}</td>
         <td>{{ item.description | titlecase }}</td>
       </tr>

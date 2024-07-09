@@ -24,9 +24,9 @@ export class OperacionesService {
       (`${this.url}/debtsType`);
   }
 
-  saveDebtsType(name: string): Observable<getDebtsTypeResult> {
+  saveDebtsType(name: string , side: boolean): Observable<getDebtsTypeResult> {
     return this.http.post<getDebtsTypeResult>
-      (`${this.url}/debtsType`, { name });
+      (`${this.url}/debtsType`, { name , side});
   }
 
   deleteDebtsType(_id: string): Observable<getDebtsTypeResult> {
