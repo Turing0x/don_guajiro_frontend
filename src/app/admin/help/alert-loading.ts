@@ -1,6 +1,4 @@
 import Swal from "sweetalert2";
-import 'sweetalert2/src/sweetalert2.scss'
-
 
 export const alertLoading = () => {
   Swal.fire({
@@ -10,7 +8,6 @@ export const alertLoading = () => {
     allowEscapeKey: false,
     allowOutsideClick: false,
     allowEnterKey: false,
-
     customClass: {
       popup: 'load-cont-2',
     }
