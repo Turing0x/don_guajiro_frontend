@@ -6,6 +6,7 @@ import { getDebtsTypeResult } from '../../interfaces/response.interface';
 import { OperacionesService } from '../../services/operaciones.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { getDate } from '../../help/getDate';
+import { alertLoading } from '../../help/alert-loading';
 
 @Component({
   selector: 'app-operaciones',
@@ -21,21 +22,14 @@ export class OperacionesComponent {
     (() => this.operacionesService.debtsType());
 
   constructor(private operacionesService: OperacionesService) { }
-  // ngAfterViewInit(): void {
-  //   const saveButton = document.getElementById("save-button-debts");
-
-  //   saveButton?.addEventListener("keydown", (event) => {
-  //     if (event.key === "Enter") {
-  //       // Llama a la función que deseas ejecutar aquí
-  //       console.log('siiii');
-
-  //     }
-  //   });
-  // }
 
   async ngOnInit(){
+    alertLoading();
     this.operacionesService.getAllSaveDebtsType().subscribe(
-    data => { this.operacionesService.debtsType.set({...data})})
+      data => {
+        this.operacionesService.debtsType.set({...data})
+        Swal.close();
+    })
   }
 
   public debtsForm: FormGroup = this.fb.group({
@@ -51,7 +45,6 @@ export class OperacionesComponent {
   });
 
   saveDebts() {
-
     const date = getDate();
     const owner = localStorage.getItem('access-token');
     this.debtsForm.controls['owner'].setValue(owner);
@@ -69,10 +62,11 @@ export class OperacionesComponent {
         confirmButtonText: "Confirmar"
       }).then((result) => {
         if (result.isConfirmed) {
+          alertLoading();
           this.operacionesService.saveDebts(this.debtsForm.value)
             .subscribe(
               response => {
-                console.log(response);
+                Swal.close();
                 if (!response.success)
                   this.ShowMessage(response.api_message, 'error');
               }
@@ -92,9 +86,11 @@ export class OperacionesComponent {
       confirmButtonText: "Confirmar"
     }).then(async (result) => {
       if (result.isConfirmed) {
+        alertLoading();
         this.operacionesService.saveDebtsType(this.debtsTypeForm.controls['name'].value)
           .subscribe(
             response => {
+              Swal.close();
               if (response.success) {
                 this.operacionesService.debtsType.set({ ...response })
                 this.debtsTypeForm.controls['name'].setValue('')
@@ -117,9 +113,11 @@ export class OperacionesComponent {
       confirmButtonText: "Confirmar"
     }).then(async (result) => {
       if (result.isConfirmed) {
+        alertLoading();
         this.operacionesService.deleteDebtsType(this.debtsTypeList().data[index]._id ?? '')
           .subscribe(
             response => {
+              Swal.close();
               if (response.success) {
                 this.operacionesService.debtsType.set({...response})
               }

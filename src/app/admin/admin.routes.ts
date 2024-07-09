@@ -20,10 +20,10 @@ export const routesAdmin: Routes =  [
         path:'operaciones',
         component: OperacionesComponent
       },
-      // {
-      //   path:'pendientes',
-      //   component: PendientesComponent
-      // },
+      {
+        path:'pendientes',
+        component: PendientesComponent
+      },
       {
         path:'historialOperaciones',
         component: HistorialOperacionesComponent

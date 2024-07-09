@@ -39,15 +39,13 @@
 
     </form>
 
-    @if( salesList().data.length <= 0 ){ @if(salesList().success){ <div class="loading-info-container">
+    @if( salesList().data.length <= 0 ){  <div class="loading-info-container">
       <img class="loading-info" src="../../../../assets/img/loadin-info.jpg" alt="Imagen: No encontrado" />
       <h2 style="color: #2a2185">
         No existe ninguna Coincidencia para la Busqueda
       </h2>
   </div>
   } @else {
-  <h1>Cargando data.....</h1>
-  } } @else {
   <div style="display: flex; justify-content: end; margin-top: 10px;">Importe Total Generado:
     <span style="color: #2a2185;"> {{amountTotal().total | currency}}</span>
   </div>

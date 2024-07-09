@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { OperacionesService } from '../../services/operaciones.service';
 import { getDebtsResult } from '../../interfaces/response.interface';
 import { getDate } from '../../help/getDate';
+import Swal from 'sweetalert2';
+import { alertLoading } from '../../help/alert-loading';
 
 @Component({
   selector: 'app-historial-operaciones',
@@ -21,16 +23,27 @@ export class HistorialOperacionesComponent implements OnInit {
   constructor(private operacionesService: OperacionesService) { }
 
   ngOnInit(): void {
+    alertLoading();
     this.operacionesService.getAllDebtsDate(getDate(), false).subscribe(
-      data => { this.operacionesService.debts.set({ ...data }) })
+      data => {
+        this.operacionesService.debts.set({ ...data })
+        Swal.close();
+      })
   }
 
   public saleForm: FormGroup = this.fb.group({
-    date: ['', Validators.required] });
+    date: ['', Validators.required]
+  });
 
   seachDate(all: boolean = true) {
+    alertLoading();
     this.operacionesService.getAllDebtsDate(
-      getDate(this.saleForm.controls['date'].value), all).subscribe(
-      data => { this.operacionesService.debts.set({ ...data }); })
+      getDate(this.saleForm.controls['date'].value), all)
+      .subscribe(
+        data => {
+          Swal.close();
+          this.operacionesService.debts.set({ ...data });
+        }
+      )
   }
 }

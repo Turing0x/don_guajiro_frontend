@@ -33,6 +33,7 @@ export class LoginComponent {
     this.authService.login(username, password).subscribe(
       resp => {
         this.gettingData = false;
+
         if (!resp.success) Swal.fire('Error', 'Credenciales Incorrectas', 'error');
         else
           if (resp.data.role === 'admin') {
