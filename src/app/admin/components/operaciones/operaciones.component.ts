@@ -21,6 +21,7 @@ export class OperacionesComponent {
   public debtsTypeList = computed<getDebtsTypeResult>
     (() => this.operacionesService.debtsType());
 
+
   constructor(private operacionesService: OperacionesService) { }
 
   async ngOnInit(){
@@ -42,6 +43,7 @@ export class OperacionesComponent {
 
   public debtsTypeForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
+    side: [true, Validators.required]
   });
 
   saveDebts() {
@@ -76,6 +78,7 @@ export class OperacionesComponent {
   }
 
   SaveDebtsType() {
+
     Swal.fire({
       title: "Estás seguro?",
       text: "Esta acción guardará el tipo de operación.",
@@ -87,7 +90,7 @@ export class OperacionesComponent {
     }).then(async (result) => {
       if (result.isConfirmed) {
         alertLoading();
-        this.operacionesService.saveDebtsType(this.debtsTypeForm.controls['name'].value)
+        this.operacionesService.saveDebtsType(this.debtsTypeForm.controls['name'].value, this.debtsTypeForm.controls['side'].value)
           .subscribe(
             response => {
               Swal.close();

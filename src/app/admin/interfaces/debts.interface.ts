@@ -10,5 +10,5 @@ export interface Debts {
 export interface DebtsType{
   _id?:string,
   name?:string;
-  status?:boolean;
+  side?:boolean;
 }
